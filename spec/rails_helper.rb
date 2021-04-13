@@ -40,6 +40,7 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include ApplicationHelper #included helpers
   config.include FactoryBot::Syntax::Methods # methods factory bot
+  config.render_views # views json
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
