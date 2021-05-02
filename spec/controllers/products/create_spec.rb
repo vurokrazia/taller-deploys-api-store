@@ -22,7 +22,7 @@ RSpec.describe V1::ProductsController, type: :controller do
             end
             context 'Estructura correcta del producto' do
                 subject { payload_test }
-                it { is_expected.to include(:id, :name, :description, :created_at, :updated_at, :store_id) }
+                it { is_expected.to include(:id, :name, :price, :description, :created_at, :updated_at, :store_id) }
             end
         end
         context 'Fallo registro del producto' do
