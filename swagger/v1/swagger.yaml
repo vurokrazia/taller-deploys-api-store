@@ -1,0 +1,132 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/v1/products/":
+    post:
+      summary: Registro de products
+      tags:
+      - Products
+      parameters: []
+      security:
+      - Bearer: []
+      responses:
+        '201':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/product"
+  "/{locale}/v1/users/login":
+    parameters:
+    - name: locale
+      in: path
+      description: locale
+      required: true
+      schema:
+        type: string
+    post:
+      summary: login usuario
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/login_user"
+  "/v1/users":
+    post:
+      summary: Registro de usuario
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/user"
+components:
+  securitySchemes:
+    Bearer:
+      description: Token bearer del usuario para identificarlo y dar acceso a los
+        recursos
+      type: apiKey
+      name: Authorization
+      in: header
+    Test:
+      description: Token bearer del usuario para identificarlo y dar acceso a los
+        recursos
+      type: apiKey
+      name: SecretKey
+      in: header
+  schemas:
+    user:
+      type: object
+      properties:
+        email:
+          type: string
+          required: true
+        password:
+          type: string
+          required: true
+        age:
+          type: integer
+          required: true
+        store_attributes:
+          type: object
+          properties:
+            name:
+              type: string
+              required: true
+      example:
+        user:
+          email: test@test.com
+          password: '123456'
+          age: 25
+          store_attributes:
+            name: test
+    login_user:
+      type: object
+      properties:
+        email:
+          type: string
+          required: true
+        password:
+          type: string
+          required: true
+      example:
+        user:
+          email: test@test.com
+          password: '123456'
+    product:
+      type: object
+      properties:
+        name:
+          type: string
+          required: true
+        description:
+          type: string
+          required: true
+        price:
+          type: string
+          required: true
+      example:
+        product:
+          name: product_test
+          description: description_example
+          price: 50
+servers:
+- url: "{defaultHost}"
+  variables:
+    defaultHost:
+      default: http://localhost:3000

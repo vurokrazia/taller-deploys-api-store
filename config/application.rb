@@ -23,7 +23,7 @@ module StoreApi
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
-    I18n.locale = :es
+    I18n.default_locale = :es
     I18n.available_locales = %i[es en]
     # Configuration for the application, engines, and railties goes here.
     #
