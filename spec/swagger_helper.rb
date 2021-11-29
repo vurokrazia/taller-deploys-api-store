@@ -27,15 +27,9 @@ RSpec.configure do |config|
           Bearer: {
             description: "Token bearer del usuario para identificarlo y dar acceso a los recursos",
             type: :apiKey,
-            name: :Authorization,
             in: :header,
-          },
-          Test: {
-            description: "Token bearer del usuario para identificarlo y dar acceso a los recursos",
-            type: :apiKey,
-            name: :SecretKey,
-            in: :header,
-          },
+            name: :Authorization
+          }
         },
         schemas: {
           user: {
@@ -74,6 +68,11 @@ RSpec.configure do |config|
                 password: "123456",
               },
             },
+          },
+          product_id: {
+            type: :integer,
+            required: true,
+            example: "1"
           },
           product: {
             type: :object,

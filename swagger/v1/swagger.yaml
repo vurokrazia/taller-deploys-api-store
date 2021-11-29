@@ -14,12 +14,80 @@ paths:
       - Bearer: []
       responses:
         '201':
+          description: Successful
+        '400':
+          description: Incorrect Params
+        '401':
+          description: Bad Token
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/product"
+    get:
+      summary: Listado de productos
+      tags:
+      - Products
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: successful
+  "/v1/products/{id}":
+    delete:
+      summary: Eliminar producto
+      tags:
+      - Products
+      parameters:
+      - name: id
+        in: path
+        description: Id del producto
+        schema:
+          "$ref": "#/components/schemas/product_id"
+        required: true
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: Actualizar producto
+      tags:
+      - Products
+      parameters:
+      - name: id
+        in: path
+        description: Id del producto
+        schema:
+          "#ref": "#/components/schemas/product_id"
+        required: true
+      security:
+      - Bearer: []
+      responses:
+        '200':
           description: successful
       requestBody:
         content:
           application/json:
             schema:
               "$ref": "#/components/schemas/product"
+  "/v1/products/{product_id}/restore":
+    post:
+      summary: Restaurar producto
+      tags:
+      - Products
+      parameters:
+      - name: product_id
+        in: path
+        description: Id del producto
+        schema:
+          "$ref": "#/components/schemas/product_id"
+        required: true
+      security:
+      - Bearer: []
+      responses:
+        '200':
+          description: successful
   "/{locale}/v1/users/login":
     parameters:
     - name: locale
@@ -61,14 +129,8 @@ components:
       description: Token bearer del usuario para identificarlo y dar acceso a los
         recursos
       type: apiKey
+      in: header
       name: Authorization
-      in: header
-    Test:
-      description: Token bearer del usuario para identificarlo y dar acceso a los
-        recursos
-      type: apiKey
-      name: SecretKey
-      in: header
   schemas:
     user:
       type: object
@@ -108,6 +170,10 @@ components:
         user:
           email: test@test.com
           password: '123456'
+    product_id:
+      type: integer
+      required: true
+      example: '1'
     product:
       type: object
       properties:
