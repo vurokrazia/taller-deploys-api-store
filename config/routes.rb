@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   mount Rswag::Api::Engine => '/api-docs'
   scope '(:locale)', locale: /es|en/ do 
     get 'home/grettings'
+    root 'home#index'
     namespace :v1, defaults: { format: 'json' } do
       resources :users, only: %i[create] do
         #"v1/users/login"
